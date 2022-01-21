@@ -1,9 +1,9 @@
 import * as fs from 'fs';
-import { MockList, mockServer } from 'graphql-tools';
+import { MockList, mockServer } from '@graphql-tools/mock';
 
 export function mockPlaylistServer() {
   // Load graphql schema file from src folder as TS doesn't copy it to lib
-  const typeDefs = [fs.readFileSync(__dirname + '/../../src/test/playlist.graphql', 'utf8')];
+  const schema = [fs.readFileSync(__dirname + '/../../src/test/playlist.graphql', 'utf8')];
 
   // Can add mock resolvers but they are optional.
   // If not provided, mockServer will return it's own mock data.
@@ -54,5 +54,5 @@ export function mockPlaylistServer() {
     // }),
   };
 
-  return mockServer(typeDefs, mocks, true);
+  return mockServer(schema, mocks, true);
 }
