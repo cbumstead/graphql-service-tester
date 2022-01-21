@@ -14,6 +14,16 @@ type Query {
 }
 ```
 
+```graphql
+type Query {
+  """
+  Examples
+  playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg")
+  """
+  playlist(id: ID!): Playlist
+}
+```
+
 ## Getting Started
 
 To get a local copy up and running follow these simple example steps.
