@@ -8,8 +8,10 @@ By adding comments in this format you allow the tester to create a query that wi
 
 ```graphql
 type Query {
-  # Examples:
-  # playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg")
+  """
+  Examples:
+  playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg")
+  """
   playlist(id: ID!): Playlist
 }
 ```
@@ -58,14 +60,18 @@ Both queries and mutations are supported.
 
 ```graphql
 type Query {
-  # Examples:
-  # playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg")
+  """
+  Examples:
+  playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg")
+  """
   playlist(id: ID!): Playlist
 }
 
 type Mutation {
-  # Examples:
-  # createPlaylist(name: "Summer Mix")
+  """
+  Examples:
+  createPlaylist(name: "Summer Mix")
+  """
   createPlaylist(name: String!): Playlist
 }
 
@@ -81,8 +87,10 @@ Directives allow adding additional functionality to the tests by adding `@direct
 
 ```graphql
 type Mutation {
-  # Examples:
-  # removePlaylist(id: "aihSOj7Qs0yzd6Kfc4x7Bg") @last()
+  """
+  Examples:
+  removePlaylist(id: "aihSOj7Qs0yzd6Kfc4x7Bg") @last()
+  """
   removePlaylist(id: ID!): Playlist
 }
 ```
@@ -93,8 +101,10 @@ Add an `@sla` directive to your query to tell it how long it should take to run.
 
 ```graphql
 type Query {
-  # Examples:
-  # playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg") @sla(maxResponseTime: "600ms")
+  """
+  Examples:
+  playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg") @sla(maxResponseTime: "600ms")
+  """
   playlist(id: ID!): Playlist
 }
 ```
@@ -119,8 +129,10 @@ The `@wait` directive causes the tester to sleep for the amount of time before r
 
 ```graphql
 type Query {
-  # Examples:
-  # playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg") @wait(waitTime: "1s")
+  """
+  Examples:
+  playlist(id: "aihSOj7Qs0yzd6Kfc4x7Bg") @wait(waitTime: "1s")
+  """
   playlist(id: ID!): Playlist
 }
 ```
@@ -141,9 +153,11 @@ Multiple queries can be defined for a single API.
 
 ```graphql
 type Mutation {
-  # Examples:
-  # summerPlaylist: createPlaylist(name: "Summer Mix")
-  # fallPlaylist: createPlaylist(name: "Fall Mix")
+  """
+  Examples:
+  summerPlaylist: createPlaylist(name: "Summer Mix")
+  fallPlaylist: createPlaylist(name: "Fall Mix")
+  """
   createPlaylist(name: String!): Playlist
 }
 ```
@@ -156,16 +170,20 @@ The response data is stored in a variable using either the query name or the ali
 
 ```graphql
 type Mutation {
-  # Examples:
-  # fallPlaylist: createPlaylist(name: "Fall Mix")
+  """
+  Examples:
+  fallPlaylist: createPlaylist(name: "Fall Mix")
+  """
   createPlaylist(name: String!): Playlist
 }
 
 // fallPlaylist = Playlist (From the above Mutation)
 
 type Query {
-  # Examples:
-  # playlist(id: "{{fallPlaylist.id}}")
+  """
+  Examples:
+  playlist(id: "{{fallPlaylist.id}}")
+  """
   playlist(id: ID!): Playlist
 }
 ```
@@ -176,14 +194,18 @@ When passing data between tests the tests become dependent on each other and the
 
 ```graphql
 type Mutation {
-  # Examples:
-  # fallPlaylist: createPlaylist(name: "Fall Mix")
+  """
+  Examples:
+  fallPlaylist: createPlaylist(name: "Fall Mix")
+  """
   createPlaylist(name: String!): Playlist
 }
 
 type Query {
-  # Examples:
-  # playlist(id: "{{fallPlaylist.id}}")
+  """
+  Examples:
+  playlist(id: "{{fallPlaylist.id}}")
+  """
   playlist(id: ID!): Playlist
 }
 ```
@@ -194,8 +216,10 @@ When tests contain mutations that remove or archive data it's often necessary to
 
 ```graphql
 type Mutation {
-  # Examples:
-  # removePlaylist(id: "{{fallPlaylist.id}}") @last()
+  """
+  Examples:
+  removePlaylist(id: "{{fallPlaylist.id}}") @last()
+  """
   removePlaylist(id: ID!): Playlist
 }
 ```
@@ -206,8 +230,10 @@ The tester attempts to increase test coverage by retrieving every field availabl
 
 ```graphql
 type Query {
-  # Examples:
-  # searchPlaylists(term: "Mix") @ensureMinimum(nItems: 2, inArrays:["searchPlaylists", "searchPlaylists.tracks"])
+  """
+  Examples:
+  searchPlaylists(term: "Mix") @ensureMinimum(nItems: 2, inArrays:["searchPlaylists", "searchPlaylists.tracks"])
+  """
   searchPlaylists(term: String!): [Playlist!]!
 }
 
@@ -231,16 +257,18 @@ When annotating, if you add `+NOFOLLOW` in examples will prevent this query from
 
 ```graphql
 type Query {
-  # Examples:
-  # +NOFOLLOW
-  # ignoredQuery(name: "Ignore me")
+  """
+  Examples:
+  +NOFOLLOW
+  ignoredQuery(name: "Ignore me")
+  """
   ignoredQuery(name: String): String
 }
 ```
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
 ## License
 
