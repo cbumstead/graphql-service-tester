@@ -22,16 +22,10 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-1. Clone the repo
+1. Install NPM packages
 
 ```sh
-git clone https://github.com/chad-superhifi/graphql-service-tester.git
-```
-
-2. Install NPM packages
-
-```sh
-npm install
+npm install graphql-service-tester
 ```
 
 ## Usage
