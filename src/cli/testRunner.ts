@@ -4,7 +4,11 @@ import QueryGenerator from '../queryGenerator';
 import GraphQLQuery from '../queryClass';
 import { IMockServer } from '../interfaces';
 
-export async function runGraphQLTests(server: string | IMockServer, progressCallback?): Promise<Array<any>> {
+export async function runGraphQLTests(
+  server: string | IMockServer,
+  headers: {},
+  progressCallback?
+): Promise<Array<any>> {
   const queryGenerator = new QueryGenerator(server);
 
   let responseData = {};
@@ -73,7 +77,7 @@ export async function runGraphQLTests(server: string | IMockServer, progressCall
       item.pluggedInArgs = pluginParameters(item.args, item, responseData, queries);
 
       report.run.start = new Date();
-      const response = await queryClient(server, item.pluggedInQuery, item.type);
+      const response = await queryClient(server, item.pluggedInQuery, item.type, headers);
       report.run.end = new Date();
 
       report.run.ms = Math.abs(+report.run.start - +report.run.end);

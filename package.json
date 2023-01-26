@@ -17,7 +17,9 @@
     "playlist:debug:slim": "tsc; node ./bin/cli.js playlist -ht",
     "playlist:debug:fast": "tsc; node ./bin/cli.js playlist -ht -v",
     "playlist:debug:verbose": "tsc; node ./bin/cli.js playlist -v",
+    "playlist:debug:header": "tsc; node ./bin/cli.js playlist -ht -H 'x-api-key: 12345' -H 'Authorization:09090'",
     "local": "tsc; node ./bin/cli.js http://localhost:3000/graphql -v",
+    "local:header": "tsc; node ./bin/cli.js http://localhost:3000/graphql -H 'x-api-key: 12345' -H 'Authorization:eyJraWQiOi...'",
     "build-ts": "tsc",
     "watch-ts": "tsc -w"
   },
