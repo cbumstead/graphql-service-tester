@@ -7,7 +7,8 @@ let mutations;
 
 beforeAll(async (done) => {
   const server = mockPlaylistServer();
-  reports = await runGraphQLTests(server);
+  const headers = {};
+  reports = await runGraphQLTests(server, headers);
   queries = reports.filter(({ query }) => query.type === 'QUERY').map((q) => q.query);
   mutations = reports.filter(({ query }) => query.type === 'MUTATION').map((q) => q.query);
   done();

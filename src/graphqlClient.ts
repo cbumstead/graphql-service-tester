@@ -15,7 +15,7 @@ function createQuery(query: string, type: string) {
   return JSON.stringify(body);
 }
 
-export async function queryClient(server: string | IMockServer, query: string, type = 'QUERY') {
+export async function queryClient(server: string | IMockServer, query: string, type = 'QUERY', headers = {}) {
   const isString = typeof server === 'string' || server instanceof String;
   const finalQuery = `${type === 'MUTATION' ? 'mutation ' : ''}${query}`;
 
@@ -24,7 +24,7 @@ export async function queryClient(server: string | IMockServer, query: string, t
       const response = await axios({
         url: server as string,
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { ...headers, ...{ 'Content-Type': 'application/json' } },
         data: createQuery(finalQuery, type),
       });
       return response?.data || {};

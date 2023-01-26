@@ -22,25 +22,33 @@ To get a local copy up and running follow these simple example steps.
 
 ### Installation
 
-1. Clone the repo
+1. Install NPM packages
 
 ```sh
-git clone https://github.com/chad-superhifi/graphql-service-tester.git
-```
-
-2. Install NPM packages
-
-```sh
-npm install
+npm install graphql-service-tester
 ```
 
 ## Usage
 
 Execute the following commands to get this tool running.
 
-```
+```sh
 graphql-service-tester http://<your-server-address>:<your-server-port>
 graphql-service-tester --help # for more information
+```
+
+### Passing Headers
+
+You can pass multiple headers by using the `-H` or `--header` flag and passing in a header in the format of `key:value`.
+
+```sh
+graphql-service-tester http://<your-server-address>:<your-server-port> -H "X-My-Header: my-value" -H "X-Second-Header: my-other-value"
+```
+
+Example:
+
+```sh
+graphql-service-tester http://localhost:3000/graphql -H "Authorization: eyJraWQiOiJUU25QbjM...."
 ```
 
 ## Features

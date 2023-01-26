@@ -21,6 +21,7 @@ async function main() {
     })
     .option('-v, --verbose', 'Displays all the query information')
     .option('-ht, --hidetable', 'Removes table Display')
+    .option('-H, --header [headers...]', 'Send header to server')
     // TODO: Add support back for running in some in parallel while preserving dependency ordering
     // .option('-p, --parallel', 'Executes all queries in parallel')
     // TODO: Add back support for retries
@@ -30,12 +31,23 @@ async function main() {
 
   let server;
 
+  const options = program.opts();
+
   if (serverUrl === 'playlist') {
     console.log('Using local mock playlist service for testing\n');
     server = mockPlaylistServer();
   }
 
-  const reportData = await runGraphQLTests(server || serverUrl, (name, percentComplete, totalQueries) => {
+  const headers = {};
+  if (options.header) {
+    console.log('headers passed to server.');
+    options.header.forEach((header) => {
+      const [key, value] = header.split(':');
+      headers[key] = value;
+    });
+  }
+
+  const reportData = await runGraphQLTests(server || serverUrl, headers, (name, percentComplete, totalQueries) => {
     if (!progressBar) {
       progressBar = term.progressBar({
         title: 'GraphQL API Tests:',
