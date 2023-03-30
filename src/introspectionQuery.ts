@@ -1,4 +1,4 @@
-export default `{
+export default `query IntrospectionQuery {
   __schema{
     queryType {
       name
